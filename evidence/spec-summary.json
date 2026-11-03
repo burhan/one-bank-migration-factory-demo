@@ -1,0 +1,18 @@
+{
+  "jobId": "MIG-1061-DEMO",
+  "revision": 1,
+  "contractFingerprint": "6f2b4cfdca22482d27e286b172d05da27ce15248f79f4a0340e79ca85402b0ee",
+  "status": "Completed",
+  "requirements": {
+    "path": ".kiro/specs/MIG-1061-DEMO/requirements.md",
+    "summary": "Normalize credits, debits, and reference-aware reversals while preserving deterministic transaction-level lineage."
+  },
+  "design": {
+    "path": ".kiro/specs/MIG-1061-DEMO/design.md",
+    "summary": "Use a two-pass transaction map so reversal signs do not depend on source-row order."
+  },
+  "tasks": {
+    "path": ".kiro/specs/MIG-1061-DEMO/tasks.md",
+    "summary": "Implementation, unit coverage, protected acceptance validation, and evidence generation are complete."
+  }
+}

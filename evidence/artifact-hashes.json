@@ -1,0 +1,16 @@
+{
+  "jobId": "MIG-1061-DEMO",
+  "revision": 1,
+  "algorithm": "sha256",
+  "artifacts": {
+    "migration_factory/transform.py": "810f9780ef6e53844a14352d0fba81dd4cbc679f4da87d7852cb64497d7f2cde",
+    "tests/test_transform_unit.py": "1f28512e2e148ef4880a0ade3804eac2c7aca06866a4c7e8f9c125e9a101625f",
+    ".kiro/specs/MIG-1061-DEMO/requirements.md": "cbb19c11263472e45ed1fd649cb6ce5b122ff9f3cd0413358c284391e4f948d2",
+    ".kiro/specs/MIG-1061-DEMO/design.md": "80b4159d8d8149c6986cd6fd2429aa7c1be8fb449d5da5e2824c97a142e5782d"
+  },
+  "protectedAcceptance": {
+    "suiteHash": "723727f67b436efec99cd4f8af4b6278fa9b1adf3da576902531e47c5cda3d16",
+    "acceptance/README.md": "20403c816361294c4559343042485727beab7bb2bbd2ac36d633985d447697e0",
+    "acceptance/test_liquidity_acceptance.py": "42a91a389ae09d6a7e7b051970a44f8e4d6027de1cdc2ade8b1bf1fdb4fec13a"
+  }
+}
