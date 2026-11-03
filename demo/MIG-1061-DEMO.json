@@ -1,0 +1,27 @@
+{
+  "migrationId": "MIG-1061-DEMO",
+  "revision": 1,
+  "title": "Liquidity report semantic transformation",
+  "repository": "burhan/one-bank-migration-factory-demo",
+  "baseBranch": "main",
+  "featureBranch": "factory/MIG-1061-DEMO/r1",
+  "source": {
+    "format": "CSV",
+    "path": "data/input/liquidity_extract.csv",
+    "description": "Synthetic liquidity report extracts"
+  },
+  "target": {
+    "format": "Parquet",
+    "logicalContractPath": "data/expected/liquidity_report_rows.json",
+    "description": "Synthetic Parquet reporting dataset"
+  },
+  "controls": {
+    "dataClassification": "SYNTHETIC",
+    "networkAccess": "DENIED",
+    "acceptanceSuite": "acceptance/test_liquidity_acceptance.py",
+    "acceptanceFilesMutable": false,
+    "lineageRequired": true,
+    "deterministicOutputRequired": true
+  },
+  "knownStarterGap": "Reversal records do not negate the economic effect of the referenced transaction."
+}

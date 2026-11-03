@@ -1,0 +1,5 @@
+transaction_id,account_id,booking_date,currency,record_type,amount,original_transaction_id
+TXN-1001,ACC-001,2026-10-30,USD,CR,125000.00,
+TXN-1002,ACC-001,2026-10-30,USD,DR,25000.00,
+TXN-1003,ACC-001,2026-10-31,USD,RV,25000.00,TXN-1002
+TXN-1004,ACC-002,2026-10-31,EUR,CR,43000.50,

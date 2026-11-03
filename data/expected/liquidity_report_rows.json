@@ -1,0 +1,42 @@
+[
+  {
+    "transaction_id": "TXN-1001",
+    "account_id": "ACC-001",
+    "booking_date": "2026-10-30",
+    "currency": "USD",
+    "record_type": "CR",
+    "signed_amount": "125000.00",
+    "original_transaction_id": "",
+    "lineage_source": "liquidity_extract.csv:2:TXN-1001"
+  },
+  {
+    "transaction_id": "TXN-1002",
+    "account_id": "ACC-001",
+    "booking_date": "2026-10-30",
+    "currency": "USD",
+    "record_type": "DR",
+    "signed_amount": "-25000.00",
+    "original_transaction_id": "",
+    "lineage_source": "liquidity_extract.csv:3:TXN-1002"
+  },
+  {
+    "transaction_id": "TXN-1003",
+    "account_id": "ACC-001",
+    "booking_date": "2026-10-31",
+    "currency": "USD",
+    "record_type": "RV",
+    "signed_amount": "25000.00",
+    "original_transaction_id": "TXN-1002",
+    "lineage_source": "liquidity_extract.csv:4:TXN-1003"
+  },
+  {
+    "transaction_id": "TXN-1004",
+    "account_id": "ACC-002",
+    "booking_date": "2026-10-31",
+    "currency": "EUR",
+    "record_type": "CR",
+    "signed_amount": "43000.50",
+    "original_transaction_id": "",
+    "lineage_source": "liquidity_extract.csv:5:TXN-1004"
+  }
+]
