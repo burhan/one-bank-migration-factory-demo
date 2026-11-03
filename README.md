@@ -1,27 +1,46 @@
-# One Bank Migration Factory Demo
+# One Bank Migration Factory
 
-This private repository contains a synthetic workload for validating the One Bank Migration Factory demo. It is intentionally separate from customer and production repositories.
+This repository is the developer workspace for versioned migration jobs. Each job has an authoritative record under `migration-jobs/<job-id>/`. Implementation changes, Kiro Specs, tests, acceptance controls, and evidence remain in Git so reviewers can reproduce every result.
 
-## Demo flow
+The repository currently contains synthetic data only. It does not contain customer records or production configuration.
 
-1. Amazon Quick creates a branch for each revision, such as `factory/MIG-1061-DEMO/r1`.
-2. Quick writes the migration request, contract fingerprint, blueprint, and Kiro steering files to that branch.
-3. A local worker checks out the branch and asks Kiro to implement the requested transformation.
-4. Kiro runs the unit and protected acceptance suites without changing the acceptance files.
-5. The worker pushes evidence files and opens a pull request.
-6. Quick reads the GitHub evidence and updates the dashboard. A button click alone does not advance the engineering status.
+## Repository layout
 
-Jira remains the source of truth for business status, ownership, and decisions. GitHub remains the source of truth for code, Specs, tests, commits, pull requests, and validation evidence.
+| Path | Purpose |
+|---|---|
+| `migration-jobs/<job-id>/` | Request, blueprint, contract fingerprint, and job documentation |
+| `.kiro/steering/<job-id>/` | Job constraints supplied to Kiro |
+| `.kiro/specs/<job-id>/` | Requirements, design, and implementation tasks created by Kiro |
+| `migration_factory/` | Versioned transformation code |
+| `tests/` | Developer unit tests |
+| `acceptance/` | Protected acceptance suite |
+| `data/input/` | Synthetic source fixtures |
+| `data/expected/` | Protected expected results |
+| `evidence/` | Validation and implementation evidence for the active job revision |
 
-## Included workload
+Shared code and controls stay at the repository root. Job identity and authoritative inputs stay under the matching job directory. Development occurs on a job revision branch such as `factory/MIG-1061-DEMO/r1`.
 
-`MIG-1061-DEMO` transforms a synthetic liquidity-report CSV extract into logical rows for a synthetic Parquet reporting dataset. The starter implementation handles credits and debits but deliberately mishandles reversal records. The protected acceptance suite exposes that gap for the Kiro portion of the demo.
+## Work on a migration job
 
-All account IDs, transaction IDs, values, dates, and records in this repository are synthetic.
+1. Open the job directory and read its `README.md`, `request.json`, and `blueprint.json`.
+2. Confirm that the current branch matches the job and revision.
+3. Read the matching steering files under `.kiro/steering/<job-id>/`.
+4. Record the protected acceptance suite hash before changing implementation code.
+5. Create or update the Kiro Spec under `.kiro/specs/<job-id>/`.
+6. Change implementation code and developer tests. Do not edit protected acceptance files or expected results.
+7. Run the build, unit tests, and protected acceptance suite.
+8. Record the resulting hashes and test results under `evidence/`.
+9. Commit the job revision and submit it for review.
 
-## Run the checks
+## Validate the current job
 
-Run the passing starter unit tests:
+Compile the implementation and tests:
+
+```bash
+python3 -m compileall -q migration_factory tests
+```
+
+Run unit tests:
 
 ```bash
 python3 -m unittest discover -s tests -p 'test_*.py' -v
@@ -33,11 +52,20 @@ Run the protected acceptance suite:
 python3 -m unittest discover -s acceptance -p 'test_*.py' -v
 ```
 
-The starter implementation is expected to fail the acceptance case for reversal records. Kiro should repair the implementation, not the expected output or acceptance suite.
+Verify the protected suite against its manifest:
 
-## Repository controls
+```bash
+shasum -a 256 acceptance/README.md acceptance/test_liquidity_acceptance.py
+```
 
-- Never add customer data, credentials, access tokens, or production configuration.
-- Do not modify files under `acceptance/` while implementing a migration request.
-- Preserve deterministic output and lineage to each source record.
-- Use feature branches and pull requests. Do not write directly to the protected default branch.
+The computed hashes must match `acceptance/manifest.sha256` and the before and after hashes recorded in `evidence/validation-result.json`.
+
+## Development controls
+
+- Use synthetic data only.
+- Work on a job revision branch. Do not change the primary branch directly.
+- Do not modify files under `acceptance/` or `data/expected/` while implementing a job.
+- Preserve transaction-level lineage from every output row to its source row.
+- Keep output deterministic for identical input.
+- Return unresolved business decisions to the named owner instead of inventing an answer.
+- Report validation failures accurately.
