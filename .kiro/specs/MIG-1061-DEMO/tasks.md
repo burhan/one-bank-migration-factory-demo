@@ -7,4 +7,4 @@
 - [x] Run the unit suite and protected acceptance suite.
 - [x] Confirm protected files and the acceptance-suite hash are unchanged.
 - [x] Write fingerprint-bound validation evidence.
-- [ ] Commit and push the feature branch, then open a pull request.
+- [x] Commit and push the feature branch, then open a pull request.
