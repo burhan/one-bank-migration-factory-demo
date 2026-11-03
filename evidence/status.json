@@ -1,0 +1,11 @@
+{
+  "jobId": "MIG-1061-DEMO",
+  "revision": 1,
+  "contractFingerprint": "6f2b4cfdca22482d27e286b172d05da27ce15248f79f4a0340e79ca85402b0ee",
+  "status": "Ready for review",
+  "publishedAt": "2026-11-03T16:40:42.653Z",
+  "publishedBy": "Current user",
+  "completedAt": "2026-11-03T18:42:29Z",
+  "validationResult": "Accepted",
+  "implementationCommitSha": "09178fa3784cc5a0ce674c84e013420e010b48b9"
+}
