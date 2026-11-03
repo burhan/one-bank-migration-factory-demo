@@ -1,0 +1,52 @@
+{
+  "blueprintId": "BP-LIQUIDITY",
+  "version": 1,
+  "name": "Liquidity report transformation blueprint",
+  "steering": [
+    "Use synthetic data only.",
+    "Do not change the primary branch; work on a feature branch.",
+    "Do not modify the protected acceptance suite.",
+    "Return an open decision when business authority is missing — never invent it."
+  ],
+  "controls": [
+    "Preserve valid source records.",
+    "Keep reversal records in the output.",
+    "Keep the difference between expected input and output totals within 0.01 in the synthetic currency unit.",
+    "Keep entity, currency, maturity_bucket, and report_date populated.",
+    "Use synthetic data only.",
+    "Do not change the primary branch.",
+    "Do not modify the protected acceptance suite.",
+    "Return an open decision when business authority is missing."
+  ],
+  "requiredSpecOutputs": [
+    "requirements.md",
+    "design.md",
+    "tasks.md",
+    "transformation code",
+    "unit tests"
+  ],
+  "acceptanceRules": [
+    "A valid record has non-null account_id, report_date and amount.",
+    "Valid input and output record counts match.",
+    "Reversal records remain present.",
+    "|sum(amount, valid input) − sum(amount, output)| ≤ 0.01.",
+    "Every required dimension remains populated.",
+    "The implementation builds.",
+    "Every fixed acceptance test passes.",
+    "No required owner decision remains open."
+  ],
+  "acceptancePath": "acceptance/ (protected)",
+  "requiredDimensions": [
+    "entity",
+    "currency",
+    "maturity_bucket",
+    "report_date"
+  ],
+  "amountTolerance": 0.01,
+  "requiredEvidence": [
+    "Kiro Spec summaries",
+    "build result",
+    "starter vs Kiro acceptance results",
+    "acceptance-suite hash before/after"
+  ]
+}
