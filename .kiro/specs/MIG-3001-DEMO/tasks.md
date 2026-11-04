@@ -1,0 +1,26 @@
+# Tasks: MIG-3001-DEMO revision 1
+
+- [ ] 1. Baseline
+  - [ ] 1.1 Record the acceptance-suite hash (see `acceptance/manifest.sha256`) before any code change
+  - [ ] 1.2 Run unit and acceptance suites; record the starter failure on the reversal case
+- [ ] 2. Resolve blocking open decisions (see open-decisions.md): OD-1, OD-2, OD-3, OD-4, OD-5, OD-6 (R1.3, R2.2, R3, R4)
+- [ ] 3. Validation and reject reporting (R1)
+  - [ ] 3.1 Unit tests for valid and invalid rows
+  - [ ] 3.2 Implement validator with row number and reason
+- [ ] 4. Reversal semantics (R2)
+  - [ ] 4.1 Unit tests: reversal of DR, reversal of CR, absent original, order independence
+  - [ ] 4.2 Implement lookup-based negation in `migration_factory/transform.py`
+- [ ] 5. Mandatory dimensions (R4)
+  - [ ] 5.1 Tests that entity, currency, maturity_bucket, report_date are never empty
+  - [ ] 5.2 Implement the authorized mapping (after OD-1)
+- [ ] 6. Reconciliation (R3)
+  - [ ] 6.1 Tests at difference 0.00, 0.01, 0.02, and mixed currencies
+  - [ ] 6.2 Implement Decimal-based reconciler
+- [ ] 7. Parquet serialization (after OD-5), with deterministic output (R6)
+- [ ] 8. Lineage and determinism tests (R6)
+- [ ] 9. Final verification
+  - [ ] 9.1 Run `python3 -m unittest discover -s tests -p 'test_*.py' -v`
+  - [ ] 9.2 Run `python3 -m unittest discover -s acceptance -p 'test_*.py' -v`
+  - [ ] 9.3 Record the acceptance-suite hash after implementation and confirm it is identical to 1.1
+  - [ ] 9.4 Confirm `git diff main -- acceptance data/expected` is empty
+  - [ ] 9.5 Open the Spec PR, copying the `<!-- mf-metadata ... -->` block from issue #2 verbatim into the PR body
